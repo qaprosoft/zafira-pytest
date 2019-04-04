@@ -13,13 +13,13 @@ def read(fname):
 
 setup(
     name='pytest-zafira',
-    version='1.0.2',
+    version='1.0.0',
     author='Vadim Delendik',
     author_email='vdelendik@qaprosoft.com',
     maintainer='Vadim Delendik',
     maintainer_email='vdelendik@qaprosoft.com',
     license='Apache Software License 2.0',
-    url='https://github.com/KhDenys/pytest-zafira',
+    url='https://github.com/qaprosoft/zafira-pytest',
     description='A Zafira plugin for pytest',
     long_description=read('README.rst'),
     packages=find_packages(),
@@ -50,6 +50,7 @@ setup(
         'six==1.11.0',
         'urllib3==1.23',
     ],
+    keywords=['pytest', 'zafira'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Pytest',
