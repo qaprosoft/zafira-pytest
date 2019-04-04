@@ -3,7 +3,7 @@
 
 import os
 import codecs
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def read(fname):
@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-zafira',
-    version='1.0.0',
+    version='1.0.1',
     author='Vadim Delendik',
     author_email='vdelendik@qaprosoft.com',
     maintainer='Vadim Delendik',
@@ -22,6 +22,7 @@ setup(
     url='https://github.com/KhDenys/pytest-zafira',
     description='A Zafira plugin for pytest',
     long_description=read('README.rst'),
+    packages=find_packages(),
     py_modules=['pytest_zafira'],
     python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
     install_requires=[
