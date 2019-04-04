@@ -38,7 +38,7 @@ setup(
         'idna==2.8',
         'jmespath==0.9.4',
         'more-itertools==4.3.0',
-        'pika==0.10.0',
+        'pika==0.12.0',
         'pluggy==0.7.1',
         'py==1.6.0',
         'pytest==4.1.1',
