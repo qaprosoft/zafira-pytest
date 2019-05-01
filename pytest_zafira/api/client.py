@@ -167,18 +167,13 @@ class ZafiraClient:
 
     def add_test_artifact_to_test(self,
                                   test_id,
+                                  link,
                                   artifact_name,
-                                  link='',
                                   expires_in=None):
 
         test_artifact["testId"] = test_id
         test_artifact["link"] = link
         test_artifact["name"] = artifact_name
-        if expires_in is None:
-            expires_in = Context.get(
-                        PARAMETER['ARTIFACT_EXPIRES_IN_DEFAULT_TIME']
-                    )
-
         test_artifact["expiresIn"] = expires_in
 
         return self.api.post(

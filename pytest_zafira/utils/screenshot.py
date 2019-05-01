@@ -40,9 +40,9 @@ class Screenshot:
             str(date.today().strftime(cls.DATE_FORMAT))
         ) + filename
 
-        logging.getLogger('zafira').info("TEST FAILED!")
-        logging.getLogger('zafira').setLevel('META_INFO')
-        logging.getLogger('zafira').meta_info(
+        cls.logger.info("TEST FAILED!")
+        cls.logger.setLevel('META_INFO')
+        cls.logger.meta_info(
             "Uploading to AWS: {}. Expires in {} seconds.".format(filename,
                                                                   expires_in),
             extra={'amazon_path': None,

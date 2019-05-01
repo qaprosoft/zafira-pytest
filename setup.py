@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-zafira',
-    version='1.0.0',
+    version='1.0.1',
     author='Vadim Delendik',
     author_email='vdelendik@qaprosoft.com',
     maintainer='Vadim Delendik',
@@ -24,7 +24,7 @@ setup(
     long_description=read('README.rst'),
     packages=find_packages(),
     py_modules=['pytest_zafira'],
-    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
+    python_requires='!=2.*.*, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
     install_requires=[
         'allure-python-commons==2.5.4',
         'atomicwrites==1.2.1',
@@ -38,7 +38,7 @@ setup(
         'idna==2.8',
         'jmespath==0.9.4',
         'more-itertools==4.3.0',
-        'pika==0.12.0',
+        'pika==1.0.1',
         'pluggy==0.7.1',
         'py==1.6.0',
         'pytest==4.1.1',

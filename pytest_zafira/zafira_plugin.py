@@ -3,7 +3,7 @@ import logging
 import pytest
 import uuid
 
-from .constants import PARAMETER, TEST_STATUS, CONFIG
+from pytest_zafira.constants import PARAMETER, TEST_STATUS, CONFIG
 
 from .api import zafira_client
 from .utils import Context
@@ -62,7 +62,7 @@ class PyTestZafiraPlugin:
             self.job = self.zc.create_job(
                 self.user["id"],
                 job_name,
-                str(time.time()),
+                'jenkins_url',
                 "jenkins_host"
             ).json()
 
@@ -140,13 +140,13 @@ class PyTestZafiraPlugin:
                 self.test_case = self.zc.create_test_case(
                     class_name,
                     test_name,
-                    self.test_suite["id"],
-                    self.user["id"]
+                    self.test_suite['id'],
+                    self.user['id']
                 ).json()
 
                 self.test = self.zc.start_test(
-                    self.test_run["id"],
-                    self.test_case["id"],
+                    self.test_run['id'],
+                    self.test_case['id'],
                     test_name,
                     round(time.time() * 1000),
                     self.ci_test_id,
@@ -159,7 +159,7 @@ class PyTestZafiraPlugin:
 
             self.zc.finish_test(self.test)
         except ZafiraError as e:
-            self.logger.error("Unable to finish test run correctly", e)
+            self.logger.error('Unable to finish test run correctly', e)
 
     @pytest.hookimpl
     def pytest_runtest_logreport(self, report):
@@ -176,7 +176,7 @@ class PyTestZafiraPlugin:
                 if report.failed:
                     self.on_test_failure(self.test, report)
             if report.when == 'call':
-                self.test["finishTime"] = round(time.time() * 1000)
+                self.test['finishTime'] = round(time.time() * 1000)
                 test_result = report.outcome
                 if test_result == 'passed':
                     self.on_test_success(self.test)
@@ -184,10 +184,18 @@ class PyTestZafiraPlugin:
                     self.on_test_failure(self.test, report)
                 else:
                     self.on_test_skipped(self.test, report)
+
+                log_link = Context.get(PARAMETER['ZAFIRA_APP_URL'])
+                log_link += '/tests/runs/{}/info/{}'.format(
+                    self.test_run['id'],
+                    self.test['id']
+                )
+
                 self.add_artifact_to_test(
                     self.test,
                     Context.get(PARAMETER['ARTIFACT_LOG_NAME']),
-                )
+                    log_link,
+                    Context.get(PARAMETER['ARTIFACT_EXPIRES_IN_DEFAULT_TIME']))
         except ZafiraError as e:
             self.logger.error("Unable to finish test correctly", e)
 
@@ -210,7 +218,7 @@ class PyTestZafiraPlugin:
     def add_artifact_to_test(self,
                              test,
                              artifact_name,
-                             artifact_link='',
+                             artifact_link,
                              expires_in=None):
         """
         Adds test artifact to test

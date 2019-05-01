@@ -44,6 +44,7 @@ PARAMETER = {
     'BASE_URL': 'base_url',
     'SERVICE_URL': 'service-url',
     'ACCESS_TOKEN': 'access_token',
+    'ZAFIRA_APP_URL': 'zafira_app_url',
     'ZAFIRA_ENABLED': 'zafira_enabled',
     'JOB_NAME': 'job_name',
     'SUITE_NAME': 'suite_name',

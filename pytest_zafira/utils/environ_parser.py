@@ -4,7 +4,7 @@ from os import environ
 from pytest_zafira.exceptions import ConfigError
 
 
-logger = logging.getLogger('settings')
+logger = logging.getLogger('zafira')
 
 
 def get_env_var(env_var_key):

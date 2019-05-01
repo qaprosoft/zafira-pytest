@@ -9,9 +9,9 @@ class BaseDriverProvider:
         """ An abstract method which provides an instances of drivers """
 
 
-class MyDriverProvider(BaseDriverProvider):
+class DriverProvider(BaseDriverProvider):
     """
-    My-specific class, provides get-drivers functionality (for customer,
+    Class, provides get-drivers functionality (for customer,
     agent, admin-agent and admin)
     """
     def __init__(self, driver_pool):

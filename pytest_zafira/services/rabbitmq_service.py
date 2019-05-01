@@ -51,7 +51,7 @@ class RabbitHandler(logging.Handler):
         """
         moment = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.routing_key = ZafiraListener().get_ci_run_id()
-        self.connection_params['heartbeat_interval'] = 10
+        self.connection_params['heartbeat'] = 10
         if self.zafira_connected:
             try:
                 self.__create_connection()
@@ -122,7 +122,7 @@ class RabbitHandler(logging.Handler):
                 not self.channel.is_open and\
                 self.connection and\
                 self.connection.is_open:
-            self.channel = self.connection.channel(1)
+            self.channel = self.connection.channel()
         return self.channel
 
     def __create_exchange(self):
@@ -130,7 +130,7 @@ class RabbitHandler(logging.Handler):
             if not self.is_exchange_declared:
                 args = {self.type: self.history}
                 self.channel.exchange_declare(exchange=self.exchange,
-                                              type=self.type,
+                                              exchange_type=self.type,
                                               durable=False,
                                               auto_delete=False,
                                               arguments=args)

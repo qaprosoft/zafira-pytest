@@ -1,9 +1,9 @@
 import pytest
 import logging
 import itertools
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
-from pytest_zafira.utils import MyDriverProvider
+from pytest_zafira.utils import DriverProvider
 from pytest_zafira.utils.screenshot import Screenshot
 from pytest_zafira.services import amazon_cloud_service
 
@@ -24,7 +24,7 @@ class ZafiraScreenshotCapture:
         :param call: info about call
         :return:
         """
-        with ProcessPoolExecutor() as executor:
+        with ThreadPoolExecutor() as executor:
             if not self.on_exception(item, call):
                 return
 
@@ -45,7 +45,7 @@ class ZafiraScreenshotCapture:
                     call
                 )
 
-                drivers = MyDriverProvider(failed_drivers).get_drivers()
+                drivers = DriverProvider(failed_drivers).get_drivers()
 
                 for driver in drivers:
                     executor.submit(
