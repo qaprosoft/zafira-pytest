@@ -23,7 +23,6 @@ class RabbitHandler(logging.Handler):
     def __init__(self):
         logging.Handler.__init__(self)
         self.zafira_connected = self.__connect_to_zafira()
-        self.password = 'qpsdemo'
         self.exchange = 'logs'
         self.connection = None
         self.channel = None
@@ -151,8 +150,11 @@ class RabbitHandler(logging.Handler):
                                 self.port = int(setting['value'])
                             elif 'RABBITMQ_USER' in setting['name']:
                                 self.username = setting['value']
+                            elif 'RABBITMQ_PASSWORD' in setting['name']:
+                                self.password = setting['value']
                             elif 'RABBITMQ_ENABLED' in setting['name']:
                                 connected = bool(setting['value'])
+
         except APIError:
             logging.error(
                 '{} - [mq] Unable to connect with Zafira.'.format(

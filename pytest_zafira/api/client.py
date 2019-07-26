@@ -115,12 +115,14 @@ class ZafiraClient:
         test_run["knownIssue"] = known_issue
         test_run["configXML"] = config
 
-        return self.api.post(
+        resp = self.api.post(
             URL_PATH['TEST_RUNS_PATH'],
             test_run,
             self.init_auth_headers(),
             "Unable to start test run"
         )
+
+        return resp
 
     def finish_test_run(self, test_run_id):
         return self.api.post(

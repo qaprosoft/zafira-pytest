@@ -80,6 +80,13 @@ class PyTestZafiraPlugin:
                 e
             )
 
+        except Exception as e:
+            self.ZAFIRA_ENABLED = False
+            self.logger.error(
+                "Undefined error during pytest_sessionstart!",
+                e
+            )
+
     @pytest.hookimpl
     def pytest_runtest_setup(self, item):
         """

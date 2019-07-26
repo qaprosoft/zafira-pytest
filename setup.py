@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-zafira',
-    version='1.0.1',
+    version='1.0.2',
     author='Vadim Delendik',
     author_email='vdelendik@qaprosoft.com',
     maintainer='Vadim Delendik',

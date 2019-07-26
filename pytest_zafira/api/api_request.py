@@ -21,7 +21,7 @@ class APIRequest:
             response = requests.get(url=url, headers=headers)
         except APIError as e:
             self.logger.error(default_err_msg, e)
-        return self.__verify_response(response)
+        return self.__verify_response(response, url, None)
 
     def post_without_authorization(self,
                                    endpoint,
@@ -33,7 +33,7 @@ class APIRequest:
             response = requests.post(url, json=body)
         except APIError as e:
             self.logger.error(default_err_msg, e)
-        return self.__verify_response(response)
+        return self.__verify_response(response, url, body)
 
     def post(self,
              endpoint,
@@ -46,18 +46,21 @@ class APIRequest:
             response = requests.post(url, json=body, headers=headers)
         except APIError as e:
             self.logger.error(default_err_msg, e)
-        return self.__verify_response(response)
+        return self.__verify_response(response, url, body)
 
     @staticmethod
-    def __verify_response(response):
+    def __verify_response(response, url=None, body=None):
         """
         Log and check API call. In case status code of response is not 200,
         will raise an HTTPException
         """
         status_code = response.status_code
         if status_code > 200:
-            raise APIError(
-                "HTTP call fails. Response status code {}".format(status_code)
-            )
+            err_msg = "HTTP call fails." \
+                      " Response status code {}" \
+                      " from {}" \
+                      " with body {}".format(status_code, url, body)
+
+            raise APIError(err_msg)
 
         return response
