@@ -1,6 +1,7 @@
+import os
 import configparser
 
-CONFIG_FILE_PATH = '/Users/KhD/Desktop/PythonAT/zafira_properties.ini'
+CONFIG_FILE_PATH = os.getcwd() + '/zafira_properties.ini'
 
 
 class Context:
