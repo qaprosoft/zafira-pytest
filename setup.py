@@ -48,7 +48,7 @@ setup(
         's3transfer==0.2.0',
         'selenium==3.14.0',
         'six==1.11.0',
-        'urllib3==1.23',
+        'urllib3==1.24.2',
     ],
     keywords=['pytest', 'zafira'],
     classifiers=[
