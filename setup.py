@@ -40,7 +40,7 @@ setup(
         'more-itertools==4.3.0',
         'pika==1.0.1',
         'pluggy==0.7.1',
-        'py==1.6.0',
+        'py==1.10.0',
         'pytest==4.1.1',
         'python-dateutil==2.8.0',
         'PyYAML==3.13',
