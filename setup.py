@@ -31,7 +31,7 @@ setup(
         'attrs==18.2.0',
         'boto3==1.9.106',
         'botocore==1.12.106',
-        'certifi==2018.11.29',
+        'certifi==2022.12.7',
         'chardet==3.0.4',
         'configparser==3.5.0',
         'docutils==0.14',
